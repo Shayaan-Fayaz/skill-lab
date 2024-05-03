@@ -9,7 +9,7 @@ headers = {'Content-Type': 'application/json'}
 
 
 # the below is for the testing of api
-esp32_ip = "192.168.142.174"
+esp32_ip = "192.168.223.174"
 esp32_port = 80
 
 # Define the URL for the detection endpoint
@@ -40,7 +40,7 @@ while True:
         headphone_count = len(boxes)
 
         cv2.putText(frame, f"Count{headphone_count}", (50, 50), cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 0, 255))
-        # classes = set()
+        classes = set()
         for box in boxes:
             x1, y1, x2, y2 = box.xyxy[0]
             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
@@ -52,11 +52,13 @@ while True:
             currentClass = classNames[cls]
 
             if currentClass == "Headphones":
+                classes.add(currentClass)
             # assert isinstance(boxes.length, object)
                 cv2.putText(frame, currentClass, (x1, y1 - 10), cv2.FONT_HERSHEY_PLAIN,
                             1.5, (0, 0, 255), 2)  # print(x1, y1)
+        print(list(classes))
         payload = {
-            "classes": "headphone",
+            "classes": list(classes),
             "count": headphone_count
         }
 

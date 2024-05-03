@@ -2,15 +2,20 @@ import requests
 import json
 
 # Define the ESP32 IP address and port
-esp32_ip = "192.168.142.174"
+esp32_ip = "192.168.223.174"
 esp32_port = 80
 
 # Define the URL for the detection endpoint
 url = f"http://{esp32_ip}:{esp32_port}/detect"
 
+classes = set()
+classes.add("headphones")
+classes.add("phones")
+classes.add("usb")
+
 # Define the JSON payload
 payload = {
-    "classes": "example_class",
+    "classes": list(classes),
     "count": 5
 }
 
@@ -27,3 +32,11 @@ response = requests.post(url, data=payload_json, headers=headers)
 print("Response:")
 print(response.status_code)
 print(response.text)
+
+#
+# classes = set()
+#
+# classes.add("head")
+# classes.add("nose")
+# classes.add("head")
+# print(list(classes))
