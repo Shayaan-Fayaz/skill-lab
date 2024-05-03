@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import math
 import requests
 
-post_url = "http://192.168.142.174/detection"
+post_url = "http://192.168.223.174/detection"
 headers = {'Content-Type': 'application/json'}
 
 
