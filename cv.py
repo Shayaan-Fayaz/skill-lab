@@ -1,9 +1,11 @@
+import json
+
 import cv2
 from ultralytics import YOLO
 import math
 import requests
 
-post_url = "192.168.94.174/detection"
+post_url = "http://192.168.94.174/detection"
 
 # Load the pre-trained Haar Cascade classifier for face detection
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -54,7 +56,9 @@ while True:
 
                 # response = requests.post(post_url)
         classList = list(classes)
-        response = requests.post(post_url, json={"classes": classList, "count": headphone_count})
+        data = {"classes": classList, "count": headphone_count}
+        data = json.dumps(data)
+        response = requests.post(post_url, json=data)
         print(response.status_code)
 
     cv2.imshow('Image', frame)
