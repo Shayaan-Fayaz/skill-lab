@@ -4,12 +4,12 @@ from ultralytics import YOLO
 import math
 import requests
 
-post_url = "http://192.168.223.174/detection"
+post_url = "http://192.168.245.174/detection"
 headers = {'Content-Type': 'application/json'}
 
 
 # the below is for the testing of api
-esp32_ip = "192.168.223.174"
+esp32_ip = "192.168.245.174"
 esp32_port = 80
 
 # Define the URL for the detection endpoint
