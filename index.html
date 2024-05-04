@@ -13,19 +13,42 @@
     </div>
 
     <script>
-      // Fetch object count from server every 3 seconds
+      // Fetch object count and classes from server every 3 seconds
       setInterval(() => {
-        fetch("http://192.168.223.174/getcount")
+        fetch("http://192.168.227.174/getcount")
           .then((response) => response.json())
           .then((data) => {
-            document.getElementById(
-              "objectCount"
-            ).textContent = `Number of Objects: ${data.count}`;
+            console.log(data);
+            // Get the object count
+            const objectCount = data.count;
+
+            // Get the classes array
+            const classes = data.classes;
+
+            // Construct the text to display
+            let classesText = "";
+            if (classes && classes.length > 0) {
+              if (classes.length === 1) {
+                classesText = `${classes[0]}: ${objectCount}`;
+              } else {
+                for (let i = 0; i < classes.length - 1; i++) {
+                  classesText += `${classes[i]}, `;
+                }
+                classesText += `and ${
+                  classes[classes.length - 1]
+                }: ${objectCount}`;
+              }
+            } else {
+              classesText = "No objects detected";
+            }
+
+            // Update the HTML
+            document.getElementById("objectCount").textContent = classesText;
           })
           .catch((error) => {
             console.error("Error fetching object count:", error);
           });
-      }, 3000)();
+      }, 3000);
     </script>
   </body>
 </html>
