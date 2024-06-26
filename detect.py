@@ -137,12 +137,6 @@ while True:
                             1.5, (0, 0, 255), 2)  # print(x1, y1)
 
 
-                # if cow_count>=3:
-                #     requests.get("http://192.168.227.174/excesscow")
-                # if dog_count>=3:
-                #     requests.get("http://192.168.227.174/excessdog")
-                # if cat_count>=3:
-                #     requests.get("http://192.168.227.174/excesscat")
 
         if obj_count>=3:
             requests.get("http://192.168.245.174/excess")
